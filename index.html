@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+		.box{
+			width: 300px;
+			height: 200px;
+			margin: 100px auto;
+			overflow: hidden;
+			position: relative;
+		}
+		.circle{
+			position: absolute;
+			left: 50%;
+			margin-left: -28px;
+			bottom: 10px;
+		}
+		.circle span{
+			width: 8px;
+			height: 18px;
+				/*动态添加的时候不至于没有参考*/
+			float: left;
+				/*不给浮动也行*/
+			border-radius: 100%;
+			background: pink;
+			line-height: 18px;
+			text-align: center;
+			margin-left: 10px;
+			cursor: pointer;
+		}
+		.circle .current{
+			background: yellow;
+		}
+			/*注意权重*/
+			/*公共设施，谁要谁拿*/
+		ul,ol{
+			list-style: none;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+		// 创建大盒子	
+			var box=document.getElementById("scroll");
+			var circle=document.createElement("div");
+				// 创建一个div，scroll的孩子，用来存放ul
+			// circle.className="circle";
+				// 注意要加引号，class=""
+			circle.setAttribute("class","circle");
+				//常用这个，因为可以用removeAttribute()删除
+			box.appendChild(circle);
+				// 创建后要添加，怀上了还要生下来
+			var ul=document.getElementById("ul");
+				// 直接用li不好，后面可能会重复
+			var lis=ul.children;     
+				// ul的所有孩子
+			// alert(ul.length);ul不可以看作伪数组
+			// alert (lis.length);
+		// 添加若干个span元素
+			for(var i=0;i<lis.length;i++){
+				var newspan=document.createElement("span");	
+				newspan.innerHTML=i+1;
+					// 不用加引号，number类型
+				circle.appendChild(newspan);
+					// 搞清楚对象，给circle加span
+			}
+			var child=circle.children;
+			child[0].setAttribute("class","current");
+				// 第一个孩子追加
+		}
+	</script>
+</head>
+<body>
+	<div class="box" id="scroll">
+		<div class="slider"> 
+			<ul id="ul">
+				<li><img src="i/1.png"></li>
+				<li><img src="i/2.png"></li>
+				<li><img src="i/3.png"></li>
+				<li><img src="i/4.png"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
